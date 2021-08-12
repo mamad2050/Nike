@@ -10,6 +10,7 @@ import com.example.nikestore.data.repo.source.BannerRemoteDataSource
 import com.example.nikestore.data.repo.source.ProductLocalDataSource
 import com.example.nikestore.data.repo.source.ProductRemoteDataSource
 import com.example.nikestore.feature.main.MainViewModel
+import com.example.nikestore.feature.main.ProductListAdapter
 import com.example.nikestore.services.http.ApiService
 import com.example.nikestore.services.http.FrescoImageLoadingService
 import com.example.nikestore.services.http.ImageLoadingService
@@ -43,6 +44,8 @@ class App : Application() {
                 )
             }
             single <ImageLoadingService>{ FrescoImageLoadingService() }
+
+            factory { ProductListAdapter(get()) }
 
             viewModel { MainViewModel(get() , get()) }
         }

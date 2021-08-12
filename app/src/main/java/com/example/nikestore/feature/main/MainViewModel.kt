@@ -5,6 +5,8 @@ import com.example.nikestore.common.NikeSingleObserver
 import com.example.nikestore.common.NikeViewModel
 import com.example.nikestore.data.Banner
 import com.example.nikestore.data.Product
+import com.example.nikestore.data.SORT_LATEST
+import com.example.nikestore.data.SORT_POPULAR
 import com.example.nikestore.data.repo.BannerRepository
 import com.example.nikestore.data.repo.ProductRepository
 import io.reactivex.SingleObserver
@@ -23,7 +25,7 @@ class MainViewModel(productRepository: ProductRepository, bannerRepository: Bann
 
         progressBarLiveData.value = true
 
-        productRepository.getProducts()
+        productRepository.getProducts(SORT_LATEST)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doFinally { progressBarLiveData.value = false }

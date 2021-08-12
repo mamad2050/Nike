@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.convertDpToPixel
+import com.example.nikestore.data.Product
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -15,6 +19,7 @@ import timber.log.Timber
 class MainFragment : NikeFragment() {
 
     val mainViewModel: MainViewModel by viewModel()
+    val productListAdapter: ProductListAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +33,15 @@ class MainFragment : NikeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        latestProductsRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        latestProductsRv.adapter = productListAdapter
+
         mainViewModel.productsLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
+            productListAdapter.products = it as ArrayList<Product>
+
         }
 
         mainViewModel.progressBarLiveData.observe(viewLifecycleOwner) {
