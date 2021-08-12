@@ -29,5 +29,7 @@
         <item name="textAppearanceOverline">@style/TextAppearance.MyTheme.Overline</item>
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/MyBottomNavigationView</item>
+        <item name="dividerColor">@color/gray</item>
+        <item name="android:textColorSecondary">@color/darkGray</item>
     </style>
 </resources>

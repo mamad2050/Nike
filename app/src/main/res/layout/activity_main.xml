@@ -8,16 +8,16 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
+        android:id="@+id/bottomNavigationMain"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         app:menu="@menu/main_navigation" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
+        android:id="@+id/nav_host_container"
         android:name="com.example.nikestore.feature.main.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
         android:layout_marginBottom="56dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
