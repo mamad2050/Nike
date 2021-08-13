@@ -1,6 +1,7 @@
 package com.example.nikestore
 
 import android.app.Application
+import android.os.Bundle
 import com.example.nikestore.data.Product
 import com.example.nikestore.data.repo.BannerRepository
 import com.example.nikestore.data.repo.BannerRepositoryImpl
@@ -11,6 +12,7 @@ import com.example.nikestore.data.repo.source.ProductLocalDataSource
 import com.example.nikestore.data.repo.source.ProductRemoteDataSource
 import com.example.nikestore.feature.main.MainViewModel
 import com.example.nikestore.feature.main.ProductListAdapter
+import com.example.nikestore.feature.product.ProductDetailViewModel
 import com.example.nikestore.services.http.ApiService
 import com.example.nikestore.services.http.FrescoImageLoadingService
 import com.example.nikestore.services.http.ImageLoadingService
@@ -43,11 +45,12 @@ class App : Application() {
                     BannerRemoteDataSource(get())
                 )
             }
-            single <ImageLoadingService>{ FrescoImageLoadingService() }
+            single<ImageLoadingService> { FrescoImageLoadingService() }
 
             factory { ProductListAdapter(get()) }
 
-            viewModel { MainViewModel(get() , get()) }
+            viewModel { MainViewModel(get(), get()) }
+            viewModel { (bundle: Bundle) -> ProductDetailViewModel(bundle) }
         }
 
         startKoin {

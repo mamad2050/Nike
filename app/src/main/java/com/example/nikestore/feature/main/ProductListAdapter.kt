@@ -16,6 +16,8 @@ import com.example.nikestore.view.NikeImageView
 class ProductListAdapter(val imageLoadingService: ImageLoadingService) :
     RecyclerView.Adapter<ProductListAdapter.Holder>() {
 
+    var productOnClickListener: OnProductClickListener? = null
+
     var products = ArrayList<Product>()
         set(value) {
             field = value
@@ -42,6 +44,7 @@ class ProductListAdapter(val imageLoadingService: ImageLoadingService) :
         private val previousPriceTv = itemView.findViewById<TextView>(R.id.previousPriceTv)
 
         fun bindProduct(product: Product) {
+
             imageLoadingService.load(productIv, product.image)
             titleTv.text = product.title
             currentPriceTv.text = formatPrice(product.price)
@@ -49,9 +52,17 @@ class ProductListAdapter(val imageLoadingService: ImageLoadingService) :
             previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
             itemView.implementSpringAnimationTrait()
-            itemView.setOnClickListener { }
+            itemView.setOnClickListener {
+                productOnClickListener?.onProductClick(product)
+            }
 
         }
+    }
+
+    interface OnProductClickListener {
+
+        fun onProductClick(product: Product)
+
     }
 
 }
