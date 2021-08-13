@@ -36,10 +36,10 @@ class ProductListAdapter(val imageLoadingService: ImageLoadingService) :
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val productIv = itemView.findViewById<NikeImageView>(R.id.productIv)
-        val titleTv = itemView.findViewById<TextView>(R.id.productTitleTv)
-        val currentPriceTv = itemView.findViewById<TextView>(R.id.currentPriceTv)
-        val previousPriceTv = itemView.findViewById<TextView>(R.id.previousPriceTv)
+        private val productIv = itemView.findViewById<NikeImageView>(R.id.productIv)
+        private val titleTv = itemView.findViewById<TextView>(R.id.productTitleTv)
+        private val currentPriceTv = itemView.findViewById<TextView>(R.id.currentPriceTv)
+        private val previousPriceTv = itemView.findViewById<TextView>(R.id.previousPriceTv)
 
         fun bindProduct(product: Product) {
             imageLoadingService.load(productIv, product.image)
@@ -49,7 +49,7 @@ class ProductListAdapter(val imageLoadingService: ImageLoadingService) :
             previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
             itemView.implementSpringAnimationTrait()
-            itemView.setOnClickListener {  }
+            itemView.setOnClickListener { }
 
         }
     }

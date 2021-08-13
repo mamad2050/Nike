@@ -20,6 +20,7 @@ class MainFragment : NikeFragment() {
 
     val mainViewModel: MainViewModel by viewModel()
     val productListAdapter: ProductListAdapter by inject()
+    val popularsProductListAdapter: ProductListAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +34,8 @@ class MainFragment : NikeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        latestProductsRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        latestProductsRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         latestProductsRv.adapter = productListAdapter
 
         mainViewModel.productsLiveData.observe(viewLifecycleOwner) {
@@ -43,6 +43,16 @@ class MainFragment : NikeFragment() {
             productListAdapter.products = it as ArrayList<Product>
 
         }
+
+
+        popularsProductsRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        popularsProductsRv.adapter = popularsProductListAdapter
+
+        mainViewModel.popularsLiveData.observe(viewLifecycleOwner){
+            Timber.i(it.toString())
+            popularsProductListAdapter.products = it as ArrayList<Product>
+        }
+
 
         mainViewModel.progressBarLiveData.observe(viewLifecycleOwner) {
             setProgressIndicator(it)
@@ -63,9 +73,6 @@ class MainFragment : NikeFragment() {
             sliderIndicator.setViewPager2(bannerSliderViewPager)
 
         }
-
     }
-
-
 }
 

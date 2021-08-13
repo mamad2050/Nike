@@ -19,7 +19,9 @@ class MainViewModel(productRepository: ProductRepository, bannerRepository: Bann
     NikeViewModel() {
 
     val productsLiveData = MutableLiveData<List<Product>>()
+    val popularsLiveData = MutableLiveData<List<Product>>()
     val bannersLiveData = MutableLiveData<List<Banner>>()
+
 
     init {
 
@@ -31,7 +33,17 @@ class MainViewModel(productRepository: ProductRepository, bannerRepository: Bann
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
-                 productsLiveData.value = t
+                    productsLiveData.value = t
+                }
+            })
+
+        productRepository.getProducts(SORT_POPULAR)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
+                override fun onSuccess(t: List<Product>) {
+
+                    popularsLiveData.value = t
                 }
             })
 
@@ -42,7 +54,6 @@ class MainViewModel(productRepository: ProductRepository, bannerRepository: Bann
                 override fun onSuccess(t: List<Banner>) {
                     bannersLiveData.value = t
                 }
-
             })
     }
 }
