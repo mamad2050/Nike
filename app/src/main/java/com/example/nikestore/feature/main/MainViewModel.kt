@@ -15,7 +15,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class MainViewModel(productRepository: ProductRepository, bannerRepository: BannerRepository) :
+class MainViewModel(private val productRepository: ProductRepository,private val bannerRepository: BannerRepository) :
     NikeViewModel() {
 
     val productsLiveData = MutableLiveData<List<Product>>()

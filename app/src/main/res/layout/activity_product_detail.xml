@@ -10,7 +10,7 @@
     <com.example.nikestore.view.scroll.ObservableScrollView
         android:id="@+id/observableScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,13 +48,13 @@
                     tools:text="نام محصول" />
 
                 <TextView
-                    android:maxLines="1"
                     android:id="@+id/previousPriceTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ellipsize="end"
+                    android:maxLines="1"
                     android:textAppearance="?textAppearanceBody2"
                     android:textColor="?android:textColorSecondary"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,12 +74,60 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="این کتونی شدیدا برای راه رفتن و دویدن مناسب می باشد و تقریبا هیچ فشار مخربی بر روی پا و زانوی شما شما وارد نمیشود ، این کفش از استحکام بسیار بالایی برخوردار بوده و در برابر آب نیز نفوذ ناپذیر میباشد"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:text="@string/comments"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:textColor="?android:textColorSecondary" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="@string/insertComment" />
+
+
+            </FrameLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:text="این کتونی شدیدا برای راه رفتن و دویدن مناسب می باشد و تقریبا هیچ فشار مخربی بر روی پا و زانوی شما شما وارد نمیشود ، این کفش از استحکام بسیار بالایی برخوردار بوده و در برابر آب نیز نفوذ ناپذیر میباشد"
-                android:textAppearance="?textAppearanceBody2" />
+                android:layout_marginBottom="32dp"
+                android:text="@string/viewAllComments"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+
+
         </LinearLayout>
 
     </com.example.nikestore.view.scroll.ObservableScrollView>
