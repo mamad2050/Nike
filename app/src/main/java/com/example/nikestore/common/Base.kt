@@ -3,15 +3,18 @@ package com.example.nikestore.common
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nikestore.R
 import io.reactivex.disposables.CompositeDisposable
+import java.lang.IllegalStateException
 
-abstract class NikeFragment : Fragment(), NikeView{
+abstract class NikeFragment : Fragment(), NikeView {
 
     override val rootView: CoordinatorLayout?
         get() = view as CoordinatorLayout
@@ -20,10 +23,21 @@ abstract class NikeFragment : Fragment(), NikeView{
         get() = context
 }
 
-abstract class NikeActivity : AppCompatActivity(), NikeView{
+abstract class NikeActivity : AppCompatActivity(), NikeView {
 
     override val rootView: CoordinatorLayout?
-        get() = window.decorView.rootView as CoordinatorLayout
+        get() {
+            val viewGroup = window.decorView.findViewById<View>(android.R.id.content) as ViewGroup
+            if (viewGroup !is CoordinatorLayout) {
+                viewGroup.children.forEach {
+                    if (it is CoordinatorLayout)
+                        return it
+                }
+                throw IllegalStateException("RootView must be instance of coordinatorLayout")
+            } else
+                return viewGroup
+
+        }
 
 
     override val viewContext: Context?
@@ -33,14 +47,15 @@ abstract class NikeActivity : AppCompatActivity(), NikeView{
 
 interface NikeView {
 
-    val viewContext : Context?
-    val rootView : CoordinatorLayout?
+    val viewContext: Context?
+    val rootView: CoordinatorLayout?
     fun setProgressIndicator(mustShow: Boolean) {
         rootView?.let {
-            viewContext?.let {context ->
+            viewContext?.let { context ->
                 var loadingView = it.findViewById<View>(R.id.loadingView)
-                if (loadingView == null  &&  mustShow ) {
-                    loadingView = LayoutInflater.from(context).inflate(R.layout.view_loading,it,false)
+                if (loadingView == null && mustShow) {
+                    loadingView =
+                        LayoutInflater.from(context).inflate(R.layout.view_loading, it, false)
                     it.addView(loadingView)
                 }
 

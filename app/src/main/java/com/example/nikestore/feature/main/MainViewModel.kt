@@ -3,6 +3,7 @@ package com.example.nikestore.feature.main
 import androidx.lifecycle.MutableLiveData
 import com.example.nikestore.common.NikeSingleObserver
 import com.example.nikestore.common.NikeViewModel
+import com.example.nikestore.common.asyncNetworkRequest
 import com.example.nikestore.data.Banner
 import com.example.nikestore.data.Product
 import com.example.nikestore.data.SORT_LATEST
@@ -28,8 +29,7 @@ class MainViewModel(private val productRepository: ProductRepository,private val
         progressBarLiveData.value = true
 
         productRepository.getProducts(SORT_LATEST)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .asyncNetworkRequest()
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
@@ -38,8 +38,7 @@ class MainViewModel(private val productRepository: ProductRepository,private val
             })
 
         productRepository.getProducts(SORT_POPULAR)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .asyncNetworkRequest()
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
 
@@ -48,8 +47,7 @@ class MainViewModel(private val productRepository: ProductRepository,private val
             })
 
         bannerRepository.getBanners()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .asyncNetworkRequest()
             .subscribe(object : NikeSingleObserver<List<Banner>>(compositeDisposable) {
                 override fun onSuccess(t: List<Banner>) {
                     bannersLiveData.value = t

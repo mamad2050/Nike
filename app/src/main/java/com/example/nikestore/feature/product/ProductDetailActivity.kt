@@ -1,10 +1,14 @@
 package com.example.nikestore.feature.product
 
+import android.content.Intent
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
+import com.example.nikestore.common.EXTRA_KEY_ID
+import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.formatPrice
 import com.example.nikestore.data.Comment
 import com.example.nikestore.services.http.ImageLoadingService
@@ -16,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class ProductDetailActivity : AppCompatActivity() {
+class ProductDetailActivity : NikeActivity() {
 
     val productDetailViewModel: ProductDetailViewModel by viewModel { parametersOf(intent.extras) }
     val imageLoadingService: ImageLoadingService by inject()
@@ -38,9 +42,23 @@ class ProductDetailActivity : AppCompatActivity() {
 
         }
 
+        productDetailViewModel.progressBarLiveData.observe(this){
+            setProgressIndicator(it)
+        }
 
         productDetailViewModel.commentsLiveData.observe(this) {
             commentAdapter.comments = it as ArrayList<Comment>
+
+            if (it.size > 4)
+                viewAllCommentsBtn.visibility = View.VISIBLE
+
+
+            viewAllCommentsBtn.setOnClickListener {
+                startActivity(Intent(this, CommentListActivity::class.java).apply {
+                    putExtra(EXTRA_KEY_ID,productDetailViewModel.productLiveData.value!!.id)
+                })
+            }
+
         }
 
         initViews()

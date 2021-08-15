@@ -3,20 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
+
     android:layout_height="wrap_content"
-    android:background="@drawable/background_comment"
-    android:padding="16dp">
+   >
 
     <TextView
         android:id="@+id/commentTitleTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="right"
-
+    android:layout_marginStart="16dp"
         android:textAppearance="?textAppearanceBody1"
-
         app:layout_constraintBottom_toBottomOf="@+id/commentDateTv"
         app:layout_constraintEnd_toStartOf="@+id/commentDateTv"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +22,16 @@
         tools:text="عنوان کامنت" />
 
     <TextView
-        android:textColor="?android:textColorSecondary"
-        android:textAppearance="?textAppearanceBody2"
+        android:layout_marginEnd="16dp"
         android:id="@+id/commentDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="1397/2/5"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?textAppearanceBody2"
+        android:textColor="?android:textColorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1397/2/5" />
 
     <TextView
         android:textColor="?android:textColorSecondary"
@@ -55,4 +55,14 @@
         app:layout_constraintEnd_toEndOf="@+id/commentDateTv"
         app:layout_constraintStart_toStartOf="@+id/commentAuthorTv"
         app:layout_constraintTop_toBottomOf="@+id/commentAuthorTv" />
+
+    <View
+        android:id="@+id/commentDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?dividerColor"
+        app:layout_constraintEnd_toEndOf="@+id/commentDateTv"
+        app:layout_constraintStart_toStartOf="@+id/commentAuthorTv"
+        app:layout_constraintTop_toBottomOf="@+id/commentContent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

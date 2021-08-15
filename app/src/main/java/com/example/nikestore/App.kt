@@ -7,6 +7,7 @@ import com.example.nikestore.data.repo.*
 import com.example.nikestore.data.repo.source.*
 import com.example.nikestore.feature.main.MainViewModel
 import com.example.nikestore.feature.main.ProductListAdapter
+import com.example.nikestore.feature.product.CommentListViewModel
 import com.example.nikestore.feature.product.ProductDetailViewModel
 import com.example.nikestore.services.http.ApiService
 import com.example.nikestore.services.http.FrescoImageLoadingService
@@ -56,6 +57,7 @@ class App : Application() {
 
             viewModel { MainViewModel(get(), get()) }
             viewModel { (bundle: Bundle) -> ProductDetailViewModel(bundle, get()) }
+            viewModel { (productId: Int) -> CommentListViewModel(productId, get()) }
         }
 
         startKoin {
