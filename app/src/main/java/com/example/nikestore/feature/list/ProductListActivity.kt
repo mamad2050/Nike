@@ -1,22 +1,22 @@
 package com.example.nikestore.feature.list
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.EXTRA_KEY_SORT
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.data.Product
 import com.example.nikestore.feature.common.ProductListAdapter
 import com.example.nikestore.feature.common.VIEW_TYPE_LARGE
 import com.example.nikestore.feature.common.VIEW_TYPE_SMALL
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import kotlinx.android.synthetic.main.activity_product_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
 
 class ProductListActivity : NikeActivity() {
@@ -41,11 +41,9 @@ class ProductListActivity : NikeActivity() {
 
         val gridLayoutManager = GridLayoutManager(this, 2)
         productsRv.layoutManager = gridLayoutManager
-
         productsRv.adapter = productListAdapter
 
         viewModel.productsLiveData.observe(this) {
-
             productListAdapter.products = it as ArrayList<Product>
         }
 
@@ -62,6 +60,22 @@ class ProductListActivity : NikeActivity() {
                 gridLayoutManager.spanCount = 2
             }
             productListAdapter.notifyDataSetChanged()
+        }
+
+
+        viewModel.selectedSortTitleLiveData.observe(this){
+            selectedSortTitleTv.text = getString(it)
+        }
+
+        sortBtn.setOnClickListener {
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setSingleChoiceItems(
+                    R.array.sortArray, viewModel.sort
+                ) { dialog, index ->
+                    viewModel.onSelectedSortChangedByUser(index)
+                    dialog.dismiss()
+                }.setTitle(getString(R.string.sort))
+            dialog.show()
         }
 
     }

@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.EXTRA_KEY_SORT
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.convertDpToPixel
 import com.example.nikestore.data.Product
+import com.example.nikestore.data.SORT_LATEST
+import com.example.nikestore.data.SORT_POPULAR
 import com.example.nikestore.feature.common.ProductListAdapter
 import com.example.nikestore.feature.common.VIEW_TYPE_ROUND
 import com.example.nikestore.feature.common.VIEW_TYPE_SMALL
@@ -81,16 +85,23 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
             val layoutParams = bannerSliderViewPager.layoutParams
             layoutParams.height = viewPagerHeight
             bannerSliderViewPager.layoutParams = layoutParams
-
             sliderIndicator.setViewPager2(bannerSliderViewPager)
 
         }
 
         viewLatestProductsBtn.setOnClickListener {
             startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
-                putExtra(EXTRA_KEY_DATA, VIEW_TYPE_SMALL)
+                putExtra(EXTRA_KEY_DATA, SORT_LATEST)
             })
         }
+
+        viewPopularProductBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA, SORT_POPULAR)
+            })
+        }
+
+
     }
 
     override fun onProductClick(product: Product) {

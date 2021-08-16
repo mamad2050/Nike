@@ -22,7 +22,18 @@
             app:layout_scrollFlags="enterAlways"
             android:layout_height="?actionBarSize">
 
+            <View
+                android:id="@+id/sortBtn"
+                android:background="?selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/viewTypeChangerBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
+
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,13 +51,13 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/sort"
                 android:textAppearance="?textAppearanceBody1"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/selectedSortTitleTv"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/selectedSortTitleTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sortLatest"
@@ -57,11 +68,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <ImageView
+
                 android:id="@+id/viewTypeChangerBtn"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:scaleType="centerInside"
-
+                android:background="?selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

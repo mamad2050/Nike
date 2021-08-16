@@ -12,11 +12,20 @@
     <string name="insertComment">ثبت نظر</string>
     <string name="viewAllComments">مشاهده همه نظرات</string>
     <string name="productList">لیست محصولات</string>
-    <string name="sort">مرتب سازی</string>
-    <string name="sortLatest">جدیدترین</string>
+    <string name="sort">مرتب سازی بر اساس :</string>
+    <string name="sortLatest">جدید ترین</string>
     <string name="sortPopulars">محبوب ترین</string>
-    <string name="sortPriceAsc">ارزان ترین</string>
-    <string name="sortPriceDsc">گرانترین</string>
+    <string name="sortPriceHighToLow">گران ترین</string>
+    <string name="sortPriceLowToHigh">ارزان ترین</string>
 
+    
+    <string-array name="sortArray">
+
+        <item>@string/sortLatest</item>
+        <item>@string/sortPopulars</item>
+        <item>@string/sortPriceHighToLow</item>
+        <item>@string/sortPriceLowToHigh</item>
+
+    </string-array>
 
 </resources>
