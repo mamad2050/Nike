@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Nike Store</string>
     <string name="home">خانه</string>
     <string name="cart">سبد خرید</string>
@@ -10,4 +11,12 @@
     <string name="comments">نظرات کاربران</string>
     <string name="insertComment">ثبت نظر</string>
     <string name="viewAllComments">مشاهده همه نظرات</string>
+    <string name="productList">لیست محصولات</string>
+    <string name="sort">مرتب سازی</string>
+    <string name="sortLatest">جدیدترین</string>
+    <string name="sortPopulars">محبوب ترین</string>
+    <string name="sortPriceAsc">ارزان ترین</string>
+    <string name="sortPriceDsc">گرانترین</string>
+
+
 </resources>

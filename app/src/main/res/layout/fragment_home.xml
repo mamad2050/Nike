@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewPopularProductsBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -87,26 +88,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/latest"
                     android:layout_gravity="center_vertical|start"
+                    android:text="@string/latest"
                     android:textAppearance="?textAppearanceHeadline6"
                     android:textColor="?android:textColorSecondary" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/viewLatestProductsBtn"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/viewAll"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_gravity="end|center_vertical"/>
+                    android:layout_gravity="end|center_vertical"
+                    android:text="@string/viewAll" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/latestProductsRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:clipToPadding="false"/>
+                android:paddingEnd="12dp" />
 
 
             <FrameLayout
@@ -118,26 +120,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/populars"
                     android:layout_gravity="center_vertical|start"
+                    android:text="@string/populars"
                     android:textAppearance="?textAppearanceHeadline6"
                     android:textColor="?android:textColorSecondary" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/viewPopularProductsBtn"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/viewAll"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_gravity="end|center_vertical"/>
+                    android:layout_gravity="end|center_vertical"
+                    android:text="@string/viewAll" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popularsProductsRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:clipToPadding="false"/>
+                android:paddingEnd="12dp" />
 
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.text.DecimalFormat
 
 fun convertDpToPixel(dp: Float, context: Context?): Float {
     return if (context != null) {
@@ -30,8 +31,8 @@ fun formatPrice(
     price: Number,
     unitRelativeSizeFactor: Float = 0.7f
 ): SpannableString {
-    val currencyLabel="تومان"
-    val spannableString = SpannableString("$price $currencyLabel")
+    val currencyLabel = "تومان"
+    val spannableString = SpannableString("${decimalFormatter(price.toInt())} $currencyLabel")
     spannableString.setSpan(
         RelativeSizeSpan(unitRelativeSizeFactor),
         spannableString.indexOf(currencyLabel),
@@ -80,6 +81,14 @@ fun View.implementSpringAnimationTrait() {
     }
 }
 
-fun <T> Single<T>.asyncNetworkRequest():Single<T>{
+fun <T> Single<T>.asyncNetworkRequest(): Single<T> {
     return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+}
+
+
+fun decimalFormatter(price: Int): String {
+
+    val decimalFormat = DecimalFormat("###,###")
+    return decimalFormat.format(price)
+
 }

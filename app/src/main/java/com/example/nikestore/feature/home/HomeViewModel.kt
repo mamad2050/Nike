@@ -1,4 +1,4 @@
-package com.example.nikestore.feature.main
+package com.example.nikestore.feature.home
 
 import androidx.lifecycle.MutableLiveData
 import com.example.nikestore.common.NikeSingleObserver
@@ -16,7 +16,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class MainViewModel(private val productRepository: ProductRepository,private val bannerRepository: BannerRepository) :
+class HomeViewModel(private val productRepository: ProductRepository, private val bannerRepository: BannerRepository) :
     NikeViewModel() {
 
     val productsLiveData = MutableLiveData<List<Product>>()
