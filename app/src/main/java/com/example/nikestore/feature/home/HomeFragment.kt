@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
-import com.example.nikestore.common.EXTRA_KEY_SORT
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.convertDpToPixel
 import com.example.nikestore.data.Product
@@ -42,10 +41,8 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         latestProductsRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -57,7 +54,6 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
             productListAdapter.products = it as ArrayList<Product>
 
         }
-
 
         popularsProductsRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -90,24 +86,25 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         }
 
         viewLatestProductsBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
-                putExtra(EXTRA_KEY_DATA, SORT_LATEST)
-            })
+            goToProductListActivity(SORT_LATEST)
         }
 
         viewPopularProductBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
-                putExtra(EXTRA_KEY_DATA, SORT_POPULAR)
-            })
+           goToProductListActivity(SORT_POPULAR)
         }
 
 
     }
 
     override fun onProductClick(product: Product) {
-
         startActivity(Intent(requireContext(), ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA, product)
+        })
+    }
+
+    private fun goToProductListActivity(sort : Int){
+        startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
+            putExtra(EXTRA_KEY_DATA, sort)
         })
     }
 }

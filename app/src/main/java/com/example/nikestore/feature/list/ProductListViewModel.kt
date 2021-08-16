@@ -21,12 +21,10 @@ class ProductListViewModel(var sort: Int , val productRepository: ProductReposit
         R.string.sortPriceLowToHigh
     )
 
-
     init {
         getProducts()
         selectedSortTitleLiveData.value = sortTitles[sort]
     }
-
 
     private fun getProducts() {
         progressBarLiveData.value = true

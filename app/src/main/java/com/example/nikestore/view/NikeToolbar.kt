@@ -12,7 +12,7 @@ class NikeToolbar(context: Context, attrs: AttributeSet?) : FrameLayout(context,
     var onBackBtnClickListener: View.OnClickListener? = null
         set(value) {
             field = value
-            backBtn.setOnClickListener { }
+            backBtn.setOnClickListener(onBackBtnClickListener)
         }
 
     init {
