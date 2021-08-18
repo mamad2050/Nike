@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".feature.auth.AuthActivity"
+            android:theme="@style/Theme.NikeStore.AuthTheme"
             android:exported="true" />
         <activity
             android:name=".feature.list.ProductListActivity"

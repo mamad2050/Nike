@@ -23,6 +23,19 @@
     <string name="success_addToCart">به سبد خرید اضافه شد</string>
 
 
+    <string name="loginScreenTitle">ورود به حساب کاربری</string>
+    <string name="signUpScreenTitle">ایجاد حساب کاربری</string>
+
+    <string name="loginTitle">ورود</string>
+    <string name="email">ایمیل</string>
+    <string name="password">رمزععبور</string>
+    <string name="signUpHint">حساب کاربری ندارید ؟</string>
+    <string name="loginHint">قبلا ثبت نام کردید؟</string>
+    <string name="signUp">ثبت نام</string>
+    <string name="authHint">ایمیل و رمز عبور خود را وارد کنید</string>
+
+
+
     <string-array name="sortArray">
 
         <item>@string/sortLatest</item>
