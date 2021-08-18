@@ -10,6 +10,8 @@
     <com.example.nikestore.view.scroll.ObservableScrollView
         android:id="@+id/observableScrollView"
         android:layout_width="match_parent"
+        android:paddingBottom="75dp"
+        android:clipToPadding="false"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -82,9 +84,9 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <FrameLayout
-                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
 
@@ -113,12 +115,11 @@
                 android:id="@+id/commentsRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/background_comment"
-             />
+                android:clipToPadding="false" />
 
 
             <com.google.android.material.button.MaterialButton
@@ -179,5 +180,17 @@
             tools:text="نام محصول" />
 
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addToCartBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="@string/addToCart" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

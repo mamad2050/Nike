@@ -1,6 +1,7 @@
 package com.example.nikestore.feature.main
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -8,6 +9,7 @@ import com.example.nikestore.R
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class MainActivity : NikeActivity() {
 
@@ -16,6 +18,7 @@ class MainActivity : NikeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState

@@ -45,14 +45,16 @@ class App : Application() {
                 )
             }
             factory { (viewType: Int) -> ProductListAdapter(viewType, get()) }
+
             factory<CommentRepository> {
                 CommentRepositoryImpl(
                     CommentRemoteDataSource(get())
                 )
             }
+            factory<CartRepository> { CartRepositoryImpl(CartRemoteDataSource(get())) }
 
             viewModel { HomeViewModel(get(), get()) }
-            viewModel { (bundle: Bundle) -> ProductDetailViewModel(bundle, get()) }
+            viewModel { (bundle: Bundle) -> ProductDetailViewModel(bundle, get(),get()) }
             viewModel { (productId: Int) -> CommentListViewModel(productId, get()) }
             viewModel { (sort: Int) -> ProductListViewModel(sort, get()) }
         }
