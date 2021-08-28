@@ -1,10 +1,10 @@
-package com.example.nikestore.services.http
+package com.example.nikestore.services.imageloader
 
 import com.example.nikestore.view.NikeImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import java.lang.IllegalStateException
 
-class FrescoImageLoadingService : ImageLoadingService{
+class FrescoImageLoadingService : ImageLoadingService {
 
     override fun load(imageView: NikeImageView, imageUrl: String) {
         if (imageView is SimpleDraweeView)

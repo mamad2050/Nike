@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -28,14 +28,17 @@
 
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:textAppearance="?textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:alpha="0.8"
-            android:text="@string/authHint" />
+            android:text="@string/authHint"
+            android:textAppearance="?textAppearanceBody1" />
 
         <EditText
+            android:inputType="textEmailAddress"
+
+            android:id="@+id/emailET"
             style="@style/Theme.NikeStore.AuthTheme.Edittext"
             android:layout_width="@dimen/authViewWidth"
             android:layout_height="wrap_content"
@@ -43,6 +46,8 @@
             android:hint="@string/email" />
 
         <EditText
+            android:inputType="textPassword"
+            android:id="@+id/passwordEt"
             style="@style/Theme.NikeStore.AuthTheme.Edittext"
             android:layout_width="@dimen/authViewWidth"
             android:layout_height="wrap_content"
@@ -51,18 +56,19 @@
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="@dimen/authViewWidth"
-            android:gravity="center"
-android:layout_marginTop="16dp"
+            android:id="@+id/loginBtn"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="@string/loginTitle" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -70,16 +76,17 @@ android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.5"
-            android:textAppearance="?textAppearanceBody1"
-            android:text="@string/signUpHint" />
+            android:text="@string/signUpHint"
+            android:textAppearance="?textAppearanceBody1" />
 
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
+            android:id="@+id/signUpLinkBtn"
             android:layout_height="wrap_content"
             android:fontFamily="@font/primary_bold"
-            android:text="@string/signUp"/>
+            android:text="@string/signUp" />
 
     </LinearLayout>
 

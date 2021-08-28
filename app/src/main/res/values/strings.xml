@@ -21,6 +21,7 @@
 
     <string name="unknown_error">خطای نامشخص</string>
     <string name="success_addToCart">به سبد خرید اضافه شد</string>
+    <string name="pay">پرداخت</string>
 
 
     <string name="loginScreenTitle">ورود به حساب کاربری</string>
@@ -28,12 +29,17 @@
 
     <string name="loginTitle">ورود</string>
     <string name="email">ایمیل</string>
-    <string name="password">رمزععبور</string>
+    <string name="password">رمز عبور</string>
     <string name="signUpHint">حساب کاربری ندارید ؟</string>
     <string name="loginHint">قبلا ثبت نام کردید؟</string>
     <string name="signUp">ثبت نام</string>
     <string name="authHint">ایمیل و رمز عبور خود را وارد کنید</string>
-
+    <string name="removeFromCart">حدف از سبد خرید</string>
+    <string name="count">تعداد</string>
+    <string name="purchaseDetail">جزئیات خرید</string>
+    <string name="totalPrice">مبلغ کل خرید</string>
+    <string name="shippingCost">هزینه ارسال</string>
+    <string name="payablePrice">مبلغ قابل پرداخت</string>
 
 
     <string-array name="sortArray">

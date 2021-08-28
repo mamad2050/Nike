@@ -2,10 +2,8 @@ package com.example.nikestore.feature.product
 
 import android.content.Intent
 import android.graphics.Paint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_ID
@@ -13,10 +11,9 @@ import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.formatPrice
 import com.example.nikestore.data.Comment
-import com.example.nikestore.services.http.ImageLoadingService
+import com.example.nikestore.services.imageloader.ImageLoadingService
 import com.example.nikestore.view.scroll.ObservableScrollViewCallbacks
 import com.example.nikestore.view.scroll.ScrollState
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -24,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
 class ProductDetailActivity : NikeActivity() {
 

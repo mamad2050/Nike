@@ -1,4 +1,4 @@
-package com.example.nikestore.services.http
+package com.example.nikestore.services.imageloader
 
 import com.example.nikestore.view.NikeImageView
 

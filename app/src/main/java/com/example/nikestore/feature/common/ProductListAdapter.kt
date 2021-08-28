@@ -10,7 +10,7 @@ import com.example.nikestore.R
 import com.example.nikestore.common.formatPrice
 import com.example.nikestore.common.implementSpringAnimationTrait
 import com.example.nikestore.data.Product
-import com.example.nikestore.services.http.ImageLoadingService
+import com.example.nikestore.services.imageloader.ImageLoadingService
 import com.example.nikestore.view.NikeImageView
 import java.lang.IllegalStateException
 

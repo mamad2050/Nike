@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
 import com.example.nikestore.data.Banner
-import com.example.nikestore.services.http.ImageLoadingService
+import com.example.nikestore.services.imageloader.ImageLoadingService
 import com.example.nikestore.view.NikeImageView
 import org.koin.android.ext.android.inject
 import java.lang.IllegalStateException

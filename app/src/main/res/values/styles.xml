@@ -27,6 +27,7 @@
 
     <style name="Theme.NikeStore.AuthTheme.Edittext" parent="Theme.NikeStore.AuthTheme">
         <item name="android:textColorHint">#48ffffff</item>
+        <item name="android:gravity">center_vertical|right</item>
         <item name="android:textColor">?colorOnBackground</item>
         <item name="android:textSize">16sp</item>
         <item name="android:minHeight">48dp</item>
