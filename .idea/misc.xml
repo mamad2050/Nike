@@ -15,6 +15,7 @@
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/drawable/ic_grid.xml" value="0.19583333333333333" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/drawable/ic_plus_square.xml" value="0.19583333333333333" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/drawable/ic_search.xml" value="0.19583333333333333" />
+        <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/drawable/ic_undraw_empty_cart.xml" value="0.19583333333333333" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/activity_auth.xml" value="0.1796875" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/activity_comment_list.xml" value="0.14666666666666667" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/item_purchase_detail.xml" value="0.1796875" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/item_purchase_details.xml" value="0.3333333333333333" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/layout_loading.xml" value="0.1796875" />
+        <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/view_empty_state.xml" value="0.22" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/view_loading.xml" value="0.1" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/layout/view_toolbar.xml" value="0.1796875" />
         <entry key="..\:/Programming/Android/Projects/Apps/Nike/app/src/main/res/menu/main_navigation.xml" value="0.1796875" />

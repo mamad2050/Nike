@@ -1,13 +1,11 @@
 package com.example.nikestore.feature.cart
 
 import androidx.lifecycle.MutableLiveData
+import com.example.nikestore.R
 import com.example.nikestore.common.NikeSingleObserver
 import com.example.nikestore.common.NikeViewModel
 import com.example.nikestore.common.asyncNetworkRequest
-import com.example.nikestore.data.CartItem
-import com.example.nikestore.data.CartResponse
-import com.example.nikestore.data.PurchaseDetail
-import com.example.nikestore.data.TokenContainer
+import com.example.nikestore.data.*
 import com.example.nikestore.data.repo.CartRepository
 import io.reactivex.Completable
 
@@ -15,10 +13,12 @@ class CartViewModel(val cartRepository: CartRepository) : NikeViewModel() {
 
     val cartItemsLiveData = MutableLiveData<List<CartItem>>()
     val purchaseDetailLiveData = MutableLiveData<PurchaseDetail>()
+    val emptyStateLiveData = MutableLiveData<EmptyState>()
 
     private fun getCartItems() {
         if (!TokenContainer.token.isNullOrEmpty()) {
             progressBarLiveData.value = true
+            emptyStateLiveData.value = EmptyState(false)
             cartRepository.get().asyncNetworkRequest()
                 .doFinally { progressBarLiveData.value = false }
                 .subscribe(object : NikeSingleObserver<CartResponse>(compositeDisposable) {
@@ -27,16 +27,23 @@ class CartViewModel(val cartRepository: CartRepository) : NikeViewModel() {
                             cartItemsLiveData.value = t.cart_items
                             purchaseDetailLiveData.value =
                                 PurchaseDetail(t.total_price, t.shipping_cost, t.payable_price)
-                        }
+                        } else
+                            emptyStateLiveData.value = EmptyState(true, R.string.cartEmptyState)
                     }
                 })
-        }
+        } else
+            emptyStateLiveData.value = EmptyState(true, R.string.cartEmptyStateLoginRequired, true)
     }
 
     fun removeItemFromCart(cartItem: CartItem): Completable =
         cartRepository.remove(cartItem.cart_item_id)
             .doAfterSuccess {
                 calculateAndPublishPurchaseDetail()
+                cartItemsLiveData.value?.let {
+                    if (it.isEmpty())
+                        emptyStateLiveData.postValue(EmptyState(true, R.string.cartEmptyState))
+                }
+
             }.ignoreElement()
 
 

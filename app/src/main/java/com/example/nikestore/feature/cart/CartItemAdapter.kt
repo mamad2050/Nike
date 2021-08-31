@@ -78,7 +78,8 @@ class CartItemAdapter(
             containerView.changeCountProgressBar.visibility =
                 if (cartItem.changeCountProgressBarVisible) View.VISIBLE else View.GONE
 
-            containerView.cartItemCountTv.visibility = if (cartItem.changeCountProgressBarVisible) View.INVISIBLE else View.VISIBLE
+            containerView.cartItemCountTv.visibility =
+                if (cartItem.changeCountProgressBarVisible) View.INVISIBLE else View.VISIBLE
 
             containerView.increaseBtn.setOnClickListener {
                 cartItem.changeCountProgressBarVisible = true
@@ -148,10 +149,5 @@ class CartItemAdapter(
             notifyItemChanged(index)
         }
     }
-
-
-
-
-
 
 }
