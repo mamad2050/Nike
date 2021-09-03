@@ -1,11 +1,8 @@
 package com.example.nikestore.services.http
 
 import com.example.nikestore.data.*
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -51,6 +48,12 @@ interface ApiService {
 
     @POST("auth/token")
     fun refreshToken(@Body jsonObject: JsonObject): Call<TokenResponse>
+
+    @POST("order/submit")
+    fun submitOrder(@Body jsonObject: JsonObject): Single<SubmitOrderResult>
+
+    @GET("order/checkout")
+    fun checkOut(@Query("order_id") orderId: Int): Single<Checkout>
 
 
 }

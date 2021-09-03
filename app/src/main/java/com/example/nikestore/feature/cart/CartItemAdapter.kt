@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_purchase_details.view.*
 
 
 const val VIEW_TYPE_CART_ITEM = 0
-const val VIEW_TYPE_PURCHASE_DETAIL = 1
+const val VIEW_TYPE_PURCHASE_DETAILS = 1
 
 class CartItemAdapter(
     val cartItems: MutableList<CartItem>,
@@ -26,15 +26,76 @@ class CartItemAdapter(
 
     var purchaseDetail: PurchaseDetail? = null
 
+    inner class CartItemViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bindCartItem(cartItem: CartItem) {
+            containerView.productTitleTv.text = cartItem.product.title
+            containerView.cartItemCountTv.text = cartItem.count.toString()
+            containerView.previousPriceTv.text =
+                formatPrice(cartItem.product.price + cartItem.product.discount)
+            containerView.priceTv.text = formatPrice(cartItem.product.price)
+            imageLoadingService.load(containerView.productIv, cartItem.product.image)
+            containerView.removeFromCartBtn.setOnClickListener {
+                cartItemViewCallbacks.onRemoveCartItemButtonClick(cartItem)
+            }
+
+            containerView.changeCountProgressBar.visibility =
+                if (cartItem.changeCountProgressBarIsVisible) View.VISIBLE else View.GONE
+
+            containerView.cartItemCountTv.visibility=if (cartItem.changeCountProgressBarIsVisible) View.INVISIBLE else View.VISIBLE
+
+            containerView.increaseBtn.setOnClickListener {
+                cartItem.changeCountProgressBarIsVisible = true
+                containerView.changeCountProgressBar.visibility = View.VISIBLE
+                containerView.cartItemCountTv.visibility = View.INVISIBLE
+                cartItemViewCallbacks.onIncreaseCartItemButtonClick(cartItem)
+            }
+
+            containerView.decreaseBtn.setOnClickListener {
+                if (cartItem.count > 1) {
+                    cartItem.changeCountProgressBarIsVisible = true
+                    containerView.changeCountProgressBar.visibility = View.VISIBLE
+                    containerView.cartItemCountTv.visibility = View.INVISIBLE
+                    cartItemViewCallbacks.onDecreaseCartItemButtonClick(cartItem)
+                }
+            }
+
+            containerView.productIv.setOnClickListener {
+                cartItemViewCallbacks.onProductImageClick(cartItem)
+            }
+
+        }
+    }
+
+    class PurchaseDetailViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bind(totalPrice: Int, shippingCost: Int, payablePrice: Int) {
+            containerView.totalPriceTv.text = formatPrice(totalPrice)
+            containerView.shippingCostTv.text = formatPrice(shippingCost)
+            containerView.payablePriceTv.text = formatPrice(payablePrice)
+        }
+    }
+
+
+    interface CartItemViewCallbacks {
+        fun onRemoveCartItemButtonClick(cartItem: CartItem)
+        fun onIncreaseCartItemButtonClick(cartItem: CartItem)
+        fun onDecreaseCartItemButtonClick(cartItem: CartItem)
+        fun onProductImageClick(cartItem: CartItem)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_CART_ITEM)
             CartItemViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_cart, parent, false
+                )
             )
         else
             PurchaseDetailViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_purchase_details, parent, false)
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_purchase_details, parent, false
+                )
             )
     }
 
@@ -51,89 +112,13 @@ class CartItemAdapter(
     override fun getItemCount(): Int = cartItems.size + 1
 
     override fun getItemViewType(position: Int): Int {
-
         return if (position == cartItems.size)
-            VIEW_TYPE_PURCHASE_DETAIL
+            VIEW_TYPE_PURCHASE_DETAILS
         else
             VIEW_TYPE_CART_ITEM
     }
 
-    inner class CartItemViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer {
-
-        fun bindCartItem(cartItem: CartItem) {
-
-            containerView.productTitleTv.text = cartItem.product.title
-            containerView.cartItemCountTv.text = cartItem.count.toString()
-            containerView.previousPriceTv.text =
-                formatPrice(cartItem.product.price + cartItem.product.discount)
-            containerView.priceTv.text = formatPrice(cartItem.product.price)
-            imageLoadingService.load(containerView.productIv, cartItem.product.image)
-
-            containerView.removeFromCartBtn.setOnClickListener {
-                cartItemViewCallbacks.onRemoveCartItemButtonClick(cartItem)
-            }
-
-
-            containerView.changeCountProgressBar.visibility =
-                if (cartItem.changeCountProgressBarVisible) View.VISIBLE else View.GONE
-
-            containerView.cartItemCountTv.visibility =
-                if (cartItem.changeCountProgressBarVisible) View.INVISIBLE else View.VISIBLE
-
-            containerView.increaseBtn.setOnClickListener {
-                cartItem.changeCountProgressBarVisible = true
-                containerView.changeCountProgressBar.visibility = View.VISIBLE
-                containerView.cartItemCountTv.visibility = View.INVISIBLE
-                cartItemViewCallbacks.onIncreaseCartItemButtonClick(cartItem)
-            }
-
-            containerView.decreaseBtn.setOnClickListener {
-                if (cartItem.count > 1)
-                    cartItem.changeCountProgressBarVisible = true
-                containerView.changeCountProgressBar.visibility = View.VISIBLE
-                containerView.cartItemCountTv.visibility = View.INVISIBLE
-                cartItemViewCallbacks.onDecreaseCartItemButtonClick(cartItem)
-
-            }
-
-            containerView.productIv.setOnClickListener {
-                cartItemViewCallbacks.onProductImageClick(cartItem)
-            }
-
-            if (cartItem.changeCountProgressBarVisible) {
-                containerView.changeCountProgressBar.visibility = View.VISIBLE
-                containerView.increaseBtn.visibility = View.GONE
-            }
-
-
-        }
-    }
-
-    class PurchaseDetailViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer {
-
-
-        fun bind(totalPrice: Int, shippingCost: Int, payablePrice: Int) {
-
-            containerView.totalPriceTv.text = formatPrice(totalPrice)
-            containerView.shippingCostTv.text = formatPrice(shippingCost)
-            containerView.payablePriceTv.text = formatPrice(payablePrice)
-
-        }
-
-    }
-
-    interface CartItemViewCallbacks {
-        fun onRemoveCartItemButtonClick(cartItem: CartItem)
-        fun onIncreaseCartItemButtonClick(cartItem: CartItem)
-        fun onDecreaseCartItemButtonClick(cartItem: CartItem)
-        fun onProductImageClick(cartItem: CartItem)
-    }
-
-
     fun removeCartItem(cartItem: CartItem) {
-
         val index = cartItems.indexOf(cartItem)
         if (index > -1) {
             cartItems.removeAt(index)
@@ -141,13 +126,19 @@ class CartItemAdapter(
         }
     }
 
-    fun changeCount(cartItem: CartItem) {
-
+    fun increaseCount(cartItem: CartItem) {
         val index = cartItems.indexOf(cartItem)
         if (index > -1) {
-            cartItems[index].changeCountProgressBarVisible = false
+            cartItems[index].changeCountProgressBarIsVisible = false
             notifyItemChanged(index)
         }
     }
 
+    fun decreaseCount(cartItem: CartItem){
+        val index = cartItems.indexOf(cartItem)
+        if (index > -1) {
+            cartItems[index].changeCountProgressBarIsVisible = false
+            notifyItemChanged(index)
+        }
+    }
 }

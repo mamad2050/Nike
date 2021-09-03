@@ -4,15 +4,21 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.os.Bundle
 import com.example.nikestore.data.repo.*
+import com.example.nikestore.data.repo.order.OrderRemoteDataSource
+import com.example.nikestore.data.repo.order.OrderRepository
+import com.example.nikestore.data.repo.order.OrderRepositoryImpl
 import com.example.nikestore.data.repo.source.*
 import com.example.nikestore.feature.auth.AuthViewModel
 import com.example.nikestore.feature.cart.CartViewModel
+import com.example.nikestore.feature.checkout.CheckOutViewModel
 import com.example.nikestore.feature.common.ProductListAdapter
 import com.example.nikestore.feature.list.ProductListViewModel
 import com.example.nikestore.feature.home.HomeViewModel
+import com.example.nikestore.feature.main.MainViewModel
 
 import com.example.nikestore.feature.product.CommentListViewModel
 import com.example.nikestore.feature.product.ProductDetailViewModel
+import com.example.nikestore.feature.shipping.ShippingViewModel
 import com.example.nikestore.services.imageloader.FrescoImageLoadingService
 import com.example.nikestore.services.imageloader.ImageLoadingService
 import com.example.nikestore.services.http.createApiServiceInstance
@@ -49,6 +55,10 @@ class App : Application() {
                 )
             }
 
+            single<OrderRepository> {
+                OrderRepositoryImpl(OrderRemoteDataSource(get()))
+            }
+
             single { UserLocalDataSource(get()) }
 
             factory<ProductRepository> {
@@ -77,6 +87,9 @@ class App : Application() {
             viewModel { (sort: Int) -> ProductListViewModel(sort, get()) }
             viewModel { AuthViewModel(get()) }
             viewModel { CartViewModel(get()) }
+            viewModel { MainViewModel(get()) }
+            viewModel { ShippingViewModel(get()) }
+            viewModel { (orderId: Int) -> CheckOutViewModel(orderId, get()) }
         }
 
         startKoin {
@@ -84,7 +97,7 @@ class App : Application() {
             modules(myModules)
         }
 
-        val userRepository:UserRepository = get()
+        val userRepository: UserRepository = get()
         userRepository.loadToken()
 
     }
