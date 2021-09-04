@@ -1,6 +1,5 @@
 package com.example.nikestore.feature.list
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -21,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class ProductListActivity : NikeActivity() , ProductListAdapter.OnProductClickListener {
+class ProductListActivity : NikeActivity() , ProductListAdapter.ProductEventListener {
 
     val viewModel: ProductListViewModel by viewModel {
         parametersOf(
@@ -50,7 +49,7 @@ class ProductListActivity : NikeActivity() , ProductListAdapter.OnProductClickLi
         }
 
 
-        productListAdapter.productOnClickListener = this
+        productListAdapter.productEventListener = this
 
         viewTypeChangerBtn.setOnClickListener {
             if (productListAdapter.viewType == VIEW_TYPE_SMALL) {
@@ -92,5 +91,9 @@ class ProductListActivity : NikeActivity() , ProductListAdapter.OnProductClickLi
         startActivity(Intent(this, ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA, product)
         })
+    }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        TODO("Not yet implemented")
     }
 }

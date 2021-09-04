@@ -1,6 +1,7 @@
 package com.example.nikestore.feature.home
 
 import androidx.lifecycle.MutableLiveData
+import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.NikeSingleObserver
 import com.example.nikestore.common.NikeViewModel
 import com.example.nikestore.common.asyncNetworkRequest
@@ -16,7 +17,10 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class HomeViewModel(private val productRepository: ProductRepository, private val bannerRepository: BannerRepository) :
+class HomeViewModel(
+    private val productRepository: ProductRepository,
+    private val bannerRepository: BannerRepository
+) :
     NikeViewModel() {
 
     val productsLiveData = MutableLiveData<List<Product>>()
@@ -54,4 +58,24 @@ class HomeViewModel(private val productRepository: ProductRepository, private va
                 }
             })
     }
+
+    fun addProductToFavorites(product: Product) {
+        if (product.isFavorite)
+            productRepository.deleteFromFavorites(product)
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                    override fun onComplete() {
+                        product.isFavorite = false
+                    }
+                })
+        else
+            productRepository.addToFavorites(product)
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                    override fun onComplete() {
+                        product.isFavorite = true
+                    }
+                })
+    }
+
 }

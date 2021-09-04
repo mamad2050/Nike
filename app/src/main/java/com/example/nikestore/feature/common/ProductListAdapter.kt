@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.R
@@ -24,7 +25,7 @@ class ProductListAdapter(
 ) :
     RecyclerView.Adapter<ProductListAdapter.Holder>() {
 
-    var productOnClickListener: OnProductClickListener? = null
+    var productEventListener: ProductEventListener? = null
 
     var products = ArrayList<Product>()
         set(value) {
@@ -63,6 +64,7 @@ class ProductListAdapter(
         private val titleTv = itemView.findViewById<TextView>(R.id.productTitleTv)
         private val currentPriceTv = itemView.findViewById<TextView>(R.id.currentPriceTv)
         private val previousPriceTv = itemView.findViewById<TextView>(R.id.previousPriceTv)
+        private val favoriteBtn = itemView.findViewById<ImageView>(R.id.favoriteBtn)
 
         fun bindProduct(product: Product) {
 
@@ -73,16 +75,32 @@ class ProductListAdapter(
             previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
             itemView.implementSpringAnimationTrait()
+
             itemView.setOnClickListener {
-                productOnClickListener?.onProductClick(product)
+                productEventListener?.onProductClick(product)
             }
+
+
+            if (product.isFavorite)
+                favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+             else
+                favoriteBtn.setImageResource(R.drawable.ic_favorites)
+
+
+            favoriteBtn.setOnClickListener {
+                productEventListener?.onFavoriteBtnClick(product)
+                product.isFavorite = !product.isFavorite
+                notifyItemChanged(adapterPosition)
+            }
+
 
         }
     }
 
-    interface OnProductClickListener {
+    interface ProductEventListener {
 
         fun onProductClick(product: Product)
+        fun onFavoriteBtnClick(product: Product)
 
     }
 

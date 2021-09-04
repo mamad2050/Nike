@@ -10,8 +10,8 @@ interface ProductDataSource {
 
     fun getFavoriteProducts(): Single<List<Product>>
 
-    fun addToFavorites(): Completable
+    fun addToFavorites(product: Product): Completable
 
-    fun deleteFromFavorites(): Completable
+    fun deleteFromFavorites(product: Product): Completable
 
 }

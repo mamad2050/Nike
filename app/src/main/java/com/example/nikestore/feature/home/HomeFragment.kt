@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
@@ -16,7 +15,6 @@ import com.example.nikestore.data.SORT_LATEST
 import com.example.nikestore.data.SORT_POPULAR
 import com.example.nikestore.feature.common.ProductListAdapter
 import com.example.nikestore.feature.common.VIEW_TYPE_ROUND
-import com.example.nikestore.feature.common.VIEW_TYPE_SMALL
 import com.example.nikestore.feature.list.ProductListActivity
 import com.example.nikestore.feature.main.BannerSliderAdapter
 import com.example.nikestore.feature.product.ProductDetailActivity
@@ -27,11 +25,15 @@ import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 
-class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
+class HomeFragment : NikeFragment(), ProductListAdapter.ProductEventListener {
 
-    val homeViewModel: HomeViewModel by viewModel()
-    val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
-    val popularsProductListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+    private val homeViewModel: HomeViewModel by viewModel()
+    private val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+    private val popularsProductListAdapter: ProductListAdapter by inject {
+        parametersOf(
+            VIEW_TYPE_ROUND
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,7 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         latestProductsRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         latestProductsRv.adapter = productListAdapter
-        productListAdapter.productOnClickListener = this
+        productListAdapter.productEventListener = this
 
         homeViewModel.productsLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
@@ -58,7 +60,7 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         popularsProductsRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         popularsProductsRv.adapter = popularsProductListAdapter
-        popularsProductListAdapter.productOnClickListener = this
+        popularsProductListAdapter.productEventListener = this
 
         homeViewModel.popularsLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
@@ -90,7 +92,7 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         }
 
         viewPopularProductBtn.setOnClickListener {
-           goToProductListActivity(SORT_POPULAR)
+            goToProductListActivity(SORT_POPULAR)
         }
 
 
@@ -102,10 +104,16 @@ class HomeFragment : NikeFragment(), ProductListAdapter.OnProductClickListener {
         })
     }
 
-    private fun goToProductListActivity(sort : Int){
+
+    private fun goToProductListActivity(sort: Int) {
         startActivity(Intent(requireContext(), ProductListActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA, sort)
         })
     }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        homeViewModel.addProductToFavorites(product)
+    }
+
 }
 
