@@ -11,7 +11,7 @@ const val CLIENT_SECRET = "kyj1c9sVcksqGU4scMX7nLDalkjp2WoqQEf8PKAC"
 const val CLIENT_ID = 2
 
 
-class UserRemoteDataSource(val apiService: ApiService) : UserDataSource {
+class UserRemoteDataSource(private val apiService: ApiService) : UserDataSource {
     override fun login(username: String, password: String): Single<TokenResponse> {
         return apiService.login(JsonObject().apply {
             addProperty("username", username)
@@ -34,6 +34,18 @@ class UserRemoteDataSource(val apiService: ApiService) : UserDataSource {
     }
 
     override fun saveToken(token: String, refresh_token: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveUsername(username: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getUserName(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun signOut() {
         TODO("Not yet implemented")
     }
 }
