@@ -44,6 +44,7 @@ class App : Application() {
 
         val myModules = module {
 
+            single { createApiServiceInstance() }
 
             single<ImageLoadingService> { FrescoImageLoadingService() }
             single<UserRepository> {
