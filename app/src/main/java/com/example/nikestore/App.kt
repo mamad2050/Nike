@@ -38,13 +38,13 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Timber.plant(Timber.DebugTree())
+
 
         Fresco.initialize(this)
 
         val myModules = module {
 
-            single { createApiServiceInstance() }
+
             single<ImageLoadingService> { FrescoImageLoadingService() }
             single<UserRepository> {
                 UserRepositoryImpl(
@@ -59,9 +59,7 @@ class App : Application() {
                 )
             }
 
-            single<OrderRepository> {
-                OrderRepositoryImpl(OrderRemoteDataSource(get()))
-            }
+
 
             single{
                 Room.databaseBuilder(this@App,AppDataBase::class.java,"db_app").build()

@@ -16,6 +16,8 @@ class FavoriteProductsViewModel(private val productRepository: ProductRepository
     val productsLiveData = MutableLiveData<List<Product>>()
 
     init {
+
+
         productRepository.getFavoriteProducts().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {

@@ -45,7 +45,6 @@ class HomeViewModel(
             .asyncNetworkRequest()
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
-
                     popularsLiveData.value = t
                 }
             })

@@ -3,11 +3,12 @@ package com.example.nikestore.data.repo
 import com.example.nikestore.data.TokenContainer
 import com.example.nikestore.data.TokenResponse
 import com.example.nikestore.data.repo.source.UserDataSource
+import com.example.nikestore.data.repo.source.UserRemoteDataSource
 import io.reactivex.Completable
 
 class UserRepositoryImpl(
     private val userLocalDataSource: UserDataSource,
-    private val userRemoteDataSource: UserDataSource
+    private val userRemoteDataSource: UserRemoteDataSource
 ) : UserRepository {
     override fun login(username: String, password: String): Completable {
         return userRemoteDataSource.login(username, password).doOnSuccess {

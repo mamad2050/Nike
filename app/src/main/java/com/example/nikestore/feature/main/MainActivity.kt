@@ -1,7 +1,5 @@
 package com.example.nikestore.feature.main
 
-
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -14,12 +12,10 @@ import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.MaterialColors
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_product_list.*
-import kotlinx.android.synthetic.main.item_cart.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
+
 
 class MainActivity : NikeActivity() {
 
@@ -47,10 +43,10 @@ class MainActivity : NikeActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationMain)
 
         val navGraphIds = listOf(R.navigation.home, R.navigation.cart, R.navigation.profile)
-
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

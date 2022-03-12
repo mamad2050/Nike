@@ -94,6 +94,6 @@ class ProductListActivity : NikeActivity() , ProductListAdapter.ProductEventList
     }
 
     override fun onFavoriteBtnClick(product: Product) {
-        TODO("Not yet implemented")
+        viewModel.addProductToFavorites(product)
     }
 }
